@@ -16,6 +16,8 @@ services:
       - kiosk-int
     labels:
       - "traefik.docker.network=kiosk-int"
+      # - "traefik.http.middlewares.content-type.contenttype.autodetect=false"
+      # - "traefik.http.middlewares.autodetect.contenttype=false"
 
 # Для тестирования роутов traefik
   # nginx:
@@ -30,6 +32,28 @@ services:
   #     - "traefik.docker.network=kiosk-int"
   #     - "traefik.http.routers.nginx.rule=Path(`/foo`)"
 
+
+  # firefox:
+  #   restart: unless-stopped
+  #   image: jlesage/firefox
+  #   environment:
+  #     - LANG=ru_RU.UTF-8
+  #     - KEEP_APP_RUNNING=1
+  #     - DARK_MODE=1
+  #     - FF_OPEN_URL=web.monitoringtransporta.ru
+  #     - FF_KIOSK=1
+  #   ports:
+  #     - "5800:5800"
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.firefox.entrypoints=web"
+  #     - "traefik.http.services.firefox.loadbalancer.server.port=5800"
+  #     - "traefik.docker.network=kiosk-int"
+  #     - "traefik.http.routers.firefox.rule=PathPrefix(`/`)"
+  #     - "traefik.http.middlewares.autodetect.contenttype=true"
+ ##     - "traefik.http.services.firefox.loadbalancer.proxyProtocol.version=2"
+    # volumes:
+    #   - "./conf:/config:rw"
 
 
 networks:

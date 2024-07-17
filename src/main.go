@@ -15,6 +15,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/image"
@@ -22,7 +23,47 @@ import (
 	"github.com/docker/docker/client"
 )
 
+type ENV struct {
+	ListenPort      string
+	ImageName       string
+	RedirectURL     string
+	EndpointsConfig map[string]*network.EndpointSettings
+	Environment     map[string]string
+	Network         string
+	RedirectPrefix  string
+	LBport          string
+}
+
+func init() {
+	// loads values from .env into the system
+	if err := godotenv.Load(); err != nil {
+		log.Print("No .env file found")
+	}
+}
+
 func main() {
+
+	conf := func() ENV {
+		var c ENV
+
+		c.ListenPort, _ = os.LookupEnv("LISTENPORT")
+		c.ImageName, _ = os.LookupEnv("IMAGENAME")
+
+		c.Network, _ = os.LookupEnv("DOCKERNETWORK")
+
+		c.EndpointsConfig = map[string]*network.EndpointSettings{
+			c.Network: &network.EndpointSettings{
+				NetworkID: c.Network,
+			},
+		}
+
+		c.RedirectURL, _ = os.LookupEnv("REDIRECTURL")
+		c.RedirectPrefix, _ = os.LookupEnv("REDIRECTPREFIX")
+		c.LBport, _ = os.LookupEnv("LBPORT")
+		return c
+
+	}()
+
 	// Новый роутер
 	router := gin.Default()
 	// Контекст для gin
@@ -43,15 +84,16 @@ func main() {
 	// с параметрами
 	router.GET("/:name", func(ctx *gin.Context) {
 		n := ctx.Param("name")
-		st := runContainer(ctxD, cli, n)
+		st := runContainer(ctxD, cli, n, conf)
 		//ctx.IndentedJSON(200, gin.H{
 		//	"state": st,
 		//})
 		if st {
 			// Задержка на запуск контейнера. Заменить на проверку состояния
-			time.Sleep(time.Second * 1)
+			time.Sleep(time.Second * 15)
 			// Редирект на УРЛ с контейнером
-			ctx.Redirect(301, "http://127.0.0.1/"+n+"link")
+			//ctx.Redirect(301, conf.RedirectURL+n+conf.RedirectPrefix+"")
+			ctx.Redirect(301, conf.RedirectURL)
 		} else {
 			ctx.IndentedJSON(200, gin.H{
 				"err": true,
@@ -70,14 +112,14 @@ func main() {
 	})
 
 	// Запуск сервера
-	router.Run(":8099")
+	router.Run(":" + conf.ListenPort)
 }
 
 // Проверить существование контейнера
 // При отсутсвии - создать.
 // Если существует - запустить
 // Возращает true если успешно
-func runContainer(ctx context.Context, cli *client.Client, name string) bool {
+func runContainer(ctx context.Context, cli *client.Client, name string, conf ENV) bool {
 
 	containes, err := cli.ContainerList(ctx, container.ListOptions{
 		All: true,
@@ -103,30 +145,49 @@ func runContainer(ctx context.Context, cli *client.Client, name string) bool {
 
 	if !exist {
 
-		imageName := "nginx:1.16.0-alpine"
+		//imageName := "nginx:1.16.0-alpine"
 
-		out, err := cli.ImagePull(ctx, imageName, image.PullOptions{})
+		out, err := cli.ImagePull(ctx, conf.ImageName, image.PullOptions{})
 		if err != nil {
 			panic(err)
 		}
 		io.Copy(os.Stdout, out)
 
 		resp, err := cli.ContainerCreate(ctx, &container.Config{
-			Image: imageName,
+			Image: conf.ImageName,
 			Labels: map[string]string{
 				"traefik.enable": "true",
-				"traefik.http.routers." + name + ".entrypoints":               "web",
-				"traefik.http.services." + name + ".loadbalancer.server.port": "80",
-				"traefik.docker.network":                                      "kiosk-int",
-				"traefik.http.routers." + name + ".rule":                      "Path(`/" + name + "link`)",
+				"traefik.http.routers." + name + ".entrypoints": "web",
+				//"traefik.http.services." + name + ".loadbalancer.server.port": "80",
+				"traefik.http.services." + name + ".loadbalancer.server.port": conf.LBport,
+				//	"traefik.docker.network":                                      "kiosk-int",
+				"traefik.docker.network": conf.Network,
+
+				//"traefik.http.routers." + name + ".rule": "PathPrefix(`/" + name + conf.RedirectPrefix + "`)",
+				"traefik.http.routers." + name + ".rule": "PathPrefix(`/`)",
 			},
-		}, nil, &network.NetworkingConfig{
-			EndpointsConfig: map[string]*network.EndpointSettings{
-				"kiosk-gin-proxy_kiosk-int": &network.EndpointSettings{
-					NetworkID: "kiosk-gin-proxy_kiosk-int",
-				},
+			Env: []string{
+				"LANG=ru_RU.UTF-8",
+				"KEEP_APP_RUNNING=1",
+				"DARK_MODE=1",
+				"FF_OPEN_URL=ya.ru",
+				"FF_KIOSK=1",
 			},
-		}, nil, name)
+			// ExposedPorts: nat.PortSet{
+			// 	"5800": struct{}{},
+			// },
+		},
+			// &container.HostConfig{
+			// 	PortBindings: nat.PortMap{
+			// 		nat.Port("5800"): []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "5800"}},
+			// 	},
+			// },
+			nil,
+			&network.NetworkingConfig{
+				// Определение подключения к сети
+				EndpointsConfig: conf.EndpointsConfig,
+			}, nil, name)
+
 		if err != nil {
 			panic(err)
 		}
@@ -139,6 +200,7 @@ func runContainer(ctx context.Context, cli *client.Client, name string) bool {
 			panic(err)
 		}
 	}
+
 	return true
 }
 
