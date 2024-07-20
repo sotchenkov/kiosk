@@ -3,11 +3,10 @@ package main
 // info: https://ofstack.com/Server/42749/practice-of-using-golang-to-play-docker-api.html
 // info: https://gin-gonic.com/docs/examples/param-in-path/
 
-// WIP: добавить переменные окружения
-// WIP: больше контроля над запускаемым контейнером. Добавить проверки состояния и пересоздание контенера
+// WIP: Исключить вероятность создания контейнеров с одиниковыми именами
 import (
 	"context"
-	"log"
+
 	"math/rand"
 	"time"
 
@@ -22,6 +21,8 @@ import (
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 // Переменные окружения
@@ -35,6 +36,7 @@ type ENV struct {
 	RedirectPrefix  string
 	LBport          string
 	CookieName      string
+	ControllerHost  string
 }
 
 // Параметры контейнера
@@ -50,11 +52,14 @@ type UContainer struct {
 func init() {
 	// loads values from .env into the system
 	if err := godotenv.Load(); err != nil {
-		log.Print("No .env file found")
+		log.Debug().
+			Str("controler", "Env file not found").Send()
 	}
 }
 
 func main() {
+
+	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 
 	conf := func() ENV {
 		var c ENV
@@ -74,6 +79,7 @@ func main() {
 		c.RedirectPrefix, _ = os.LookupEnv("REDIRECTPREFIX")
 		c.LBport, _ = os.LookupEnv("LBPORT")
 		c.CookieName, _ = os.LookupEnv("COOKIENAME")
+		c.ControllerHost, _ = os.LookupEnv("CONTROLLERHOST")
 		return c
 
 	}()
@@ -92,24 +98,43 @@ func main() {
 	// с параметрами
 	router.GET("/", func(ctx *gin.Context) {
 		var user_cont UContainer
+		clientIP := ctx.ClientIP()
 
 		user_cont.Route, err = ctx.Cookie(conf.CookieName)
 		if err != nil || user_cont.Route == "" {
-			log.Println("Cookie no set")
+			log.Debug().
+				Str("user", "cookie not found").
+				Str("client", clientIP).
+				Send()
 			user_cont.Route = RandomRoute()
-			log.Println("Set ", user_cont.Route)
+			log.Debug().
+				Str("user", "new cookie").
+				Str("cookie", user_cont.Route).
+				Str("client", clientIP).
+				Send()
 		}
 		user_cont.Name = user_cont.Route[0:15]
-		log.Println("Cookie: ", user_cont.Route, " Name - ", user_cont.Name)
+		log.Info().
+			Str("route", user_cont.Route).
+			Str("container_name", user_cont.Name).
+			Str("client", clientIP).
+			Msg("Trying to follow a new route")
 
 		//user_cont.Name = ctx.Param("name")
 		//user_cont.Name = ctx.Query("name")
 
 		if user_cont.Exist(ctxD, cli) {
-			log.Println(user_cont.Route, " State - ", user_cont.CState, " Status - ", user_cont.CStatus, "name - ", user_cont.Name)
+			log.Debug().
+				Str("container", user_cont.CState).
+				Str("route", user_cont.Route).
+				Str("client", clientIP).
+				Msg(user_cont.Route + "; State - " + user_cont.CState + "; Status - " + user_cont.CStatus + "; name - " + user_cont.Name)
 
 		} else {
-			log.Println("Container " + user_cont.Name + " not found")
+			log.Debug().
+				Str("container", "not found").
+				Str("client", clientIP).
+				Msg("Container " + user_cont.Name + " not found")
 		}
 
 		//st := runContainer(ctxD, cli, n, conf)
@@ -117,13 +142,24 @@ func main() {
 		switch user_cont.CState {
 		// Редиректим пользователя по маршруту сразу если контейнер работаем
 		case "running":
-			ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+			log.Debug().
+				Str("container", user_cont.CState).
+				Str("route", user_cont.Route).
+				Str("client", clientIP).
+				Msg("Container " + user_cont.Name + " is running. Redirect")
+
+			ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", conf.ControllerHost, false, true)
 			ctx.Redirect(307, conf.RedirectURL)
 		case "exited":
 			// Если контейнер остановлен - зупустить, дождаться запуска и сделать редирект
-			log.Println("conteiner stopped")
-			if user_cont.StartContaner(ctxD, cli) {
-				ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+			log.Debug().
+				Str("container", user_cont.CState).
+				Str("route", user_cont.Route).
+				Str("client", clientIP).
+				Msg("Container " + user_cont.Name + " stopped. Attempt to launch")
+
+			if user_cont.StartContainer(ctxD, cli) {
+				ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", conf.ControllerHost, false, true)
 				// WIP: убрать таймеры, передалать на канал
 				time.Sleep(time.Second * 5)
 				ctx.Redirect(307, conf.RedirectURL)
@@ -134,18 +170,33 @@ func main() {
 			}
 
 		default:
+			log.Debug().
+				Str("contanier", "not found").
+				Str("route", user_cont.Route).
+				Str("client", clientIP).
+				Msg("Container not found. Attempt to create")
 
 			if !user_cont.ISExist {
 				user_cont.PullImage(ctxD, cli, conf)
 
-				if user_cont.CreateContaner(ctxD, cli, conf) {
-					log.Println("Create container - ", user_cont.Name, "route -", user_cont.Route)
-					ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+				if user_cont.CreateContainer(ctxD, cli, conf) {
+
+					log.Debug().
+						Str("container", "created").
+						Str("route", user_cont.Route).
+						Str("client", clientIP).
+						Msg("Create new container with name " + user_cont.Name)
+
+					ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", conf.ControllerHost, false, true)
 					time.Sleep(time.Second * 7)
 					ctx.Redirect(307, conf.RedirectURL)
 				} else {
-					log.Println("Error to create container")
-					ctx.SetCookie(conf.CookieName, "-", 3600, "/", "127.0.0.1", false, true)
+
+					log.Warn().
+						Str("client", clientIP).
+						Msg("Error to create container")
+
+					ctx.SetCookie(conf.CookieName, "-", 3600, "/", conf.ControllerHost, false, true)
 					ctx.IndentedJSON(200, gin.H{
 						"err": true,
 					})
@@ -155,12 +206,13 @@ func main() {
 		}
 	})
 
-	// тестовый роутер для остановки контенера
+	// тестовый роутер для чистки кук
 	router.GET("/clean", func(ctx *gin.Context) {
-		ctx.SetCookie(conf.CookieName, "", 3600, "/", "127.0.0.1", false, true)
+		ctx.SetCookie(conf.CookieName, "", 3600, "/", conf.ControllerHost, false, true)
 		ctx.IndentedJSON(200, gin.H{
 			"state": "clean",
 		})
+		log.Debug().Msg(ctx.ClientIP() + " - cookie cleaned")
 	})
 
 	// Запуск сервера
@@ -181,14 +233,14 @@ func main() {
 func stopContainer(ctx context.Context, cli *client.Client, name string, ops string) bool {
 	containes, err := cli.ContainerList(ctx, container.ListOptions{})
 	if err != nil {
-		log.Fatalln(err)
+		log.Err(err)
 	}
 
 	var contID string
 
 	for _, c := range containes {
 		for _, n := range c.Names {
-			log.Println(n)
+			// log.Println(n)
 			if n == "/"+name {
 				contID = c.ID
 				break
@@ -216,7 +268,7 @@ func (cont *UContainer) Exist(ctx context.Context, cli *client.Client) bool {
 		All: true,
 	})
 	if err != nil {
-		log.Fatalln(err)
+		log.Err(err)
 	}
 	// Итерация по списку контенейров для поиска айдишника контейнера
 	for _, c := range containes {
@@ -224,7 +276,10 @@ func (cont *UContainer) Exist(ctx context.Context, cli *client.Client) bool {
 		for _, n := range c.Names {
 			// log.Println(n)
 			if n == "/"+cont.Name {
-				log.Println("Found: ", n, " like a ", "/"+cont.Name)
+				log.Debug().
+					Str("search", "/"+cont.Name).
+					Str("found", n).
+					Msg("Search for created containers. " + "Found: " + n + " like a " + "/" + cont.Name)
 				cont.ISExist = true
 				//cont.Route = c.ID
 				cont.CState = c.State
@@ -249,7 +304,7 @@ func (cont *UContainer) PullImage(ctx context.Context, cli *client.Client, conf 
 
 }
 
-func (cont *UContainer) CreateContaner(ctx context.Context, cli *client.Client, conf ENV) bool {
+func (cont *UContainer) CreateContainer(ctx context.Context, cli *client.Client, conf ENV) bool {
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: conf.ImageName,
 		Labels: map[string]string{
@@ -289,14 +344,14 @@ func (cont *UContainer) CreateContaner(ctx context.Context, cli *client.Client, 
 		}, nil, cont.Name)
 
 	if err != nil {
-		panic(err)
+		log.Err(err)
 	}
 
 	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
-		panic(err)
+		log.Err(err)
 	} else {
 		if err := cli.ContainerStart(ctx, cont.Name, container.StartOptions{}); err != nil {
-			panic(err)
+			log.Err(err)
 		}
 	}
 
@@ -314,7 +369,7 @@ func RandomRoute() string {
 	return string(s)
 }
 
-func (cont *UContainer) StartContaner(ctx context.Context, cli *client.Client) bool {
+func (cont *UContainer) StartContainer(ctx context.Context, cli *client.Client) bool {
 	err := cli.ContainerStart(ctx, cont.CID, container.StartOptions{})
 	if err != nil {
 		return false
