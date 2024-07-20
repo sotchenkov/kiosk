@@ -1,0 +1,3 @@
+{"timestamp":15633587,"category":"webcompatreporting","name":"reason_dropdown","extra":{"glean_timestamp":"1721468748679","setting":"required"}}
+{"timestamp":15633781,"category":"nimbus_events","name":"is_ready","extra":{"glean_timestamp":"1721468748873"}}
+{"timestamp":15663680,"category":"addons_manager","name":"manage","extra":{"addon_id":"gmp-gmpopenh264","glean_timestamp":"1721468778772","method":"uninstall","source":"gmp-plugin","addon_type":"other"}}

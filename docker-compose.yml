@@ -16,44 +16,56 @@ services:
       - kiosk-int
     labels:
       - "traefik.docker.network=kiosk-int"
-      # - "traefik.http.middlewares.content-type.contenttype.autodetect=false"
-      # - "traefik.http.middlewares.autodetect.contenttype=false"
-
-# Для тестирования роутов traefik
-  # nginx:
-  #   image: nginx:1.16.0-alpine
-  #   networks:
-  #     - kiosk-int
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.nginx.entrypoints=web"
-  #     - "traefik.http.services.nginx.loadbalancer.server.port=80"
-  #     #- "traefik.http.routers.nginx.rule=Host(`nginx.$MY_DOMAIN`)"
-  #     - "traefik.docker.network=kiosk-int"
-  #     - "traefik.http.routers.nginx.rule=Path(`/foo`)"
 
 
-  # firefox:
-  #   restart: unless-stopped
-  #   image: jlesage/firefox
-  #   environment:
-  #     - LANG=ru_RU.UTF-8
-  #     - KEEP_APP_RUNNING=1
-  #     - DARK_MODE=1
-  #     - FF_OPEN_URL=web.monitoringtransporta.ru
-  #     - FF_KIOSK=1
-  #   ports:
-  #     - "5800:5800"
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.firefox.entrypoints=web"
-  #     - "traefik.http.services.firefox.loadbalancer.server.port=5800"
-  #     - "traefik.docker.network=kiosk-int"
-  #     - "traefik.http.routers.firefox.rule=PathPrefix(`/`)"
-  #     - "traefik.http.middlewares.autodetect.contenttype=true"
- ##     - "traefik.http.services.firefox.loadbalancer.proxyProtocol.version=2"
-    # volumes:
-    #   - "./conf:/config:rw"
+  kioskcontroller:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8099:8099
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - LISTENPORT=8099
+      - IMAGENAME=jlesage/firefox
+      - DOCKERNETWORK=kiosk-net
+      - REDIRECTURL=http://127.0.0.1/
+      # - REDIRECTPREFIX=
+      - LBPORT=5800
+      - COOKIENAME=monitorcookie
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kioskcontroller.entrypoints=web"
+      - "traefik.http.services.kioskcontroller.loadbalancer.server.port=8099"
+      - "traefik.http.middlewares.kioskcontrollerstrip.stripprefix.prefixes=/mast"
+      - "traefik.http.routers.kioskcontroller.middlewares=kioskcontrollerstrip"
+      - "traefik.docker.network=kiosk-int"
+      - "traefik.http.routers.kioskcontroller.rule=PathPrefix(`/mast`)"
+
+
+
+#   firefox:
+#     restart: unless-stopped
+#     image: jlesage/firefox
+#     environment:
+#       - LANG=ru_RU.UTF-8
+#       - KEEP_APP_RUNNING=1
+#       - DARK_MODE=1
+#       - FF_OPEN_URL=web.monitoringtransporta.ru
+#       - FF_KIOSK=1
+#     ports:
+#       - "5800:5800"
+#     labels:
+#       - "traefik.enable=true"
+#       - "traefik.http.routers.firefox.entrypoints=web"
+#       - "traefik.http.services.firefox.loadbalancer.server.port=5800"
+#       - "traefik.docker.network=kiosk-int"
+#       - "traefik.http.routers.firefox.rule=HeaderRegexp(`Cookie`, `.*monitorcookie=3490dv5uzx256ovgjosv32pwufz3zmg9r398u4ntt147asxvzu91jpbp6j8vzxw6.*`)"
+#       - "traefik.http.middlewares.autodetect.contenttype=true"
+#  #     - "traefik.http.services.firefox.loadbalancer.proxyProtocol.version=2"
+#     volumes:
+#       - "./conf:/config:rw"
 
 
 networks:

@@ -1,0 +1,414 @@
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.470: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.470: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:42.535: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 821, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GObject-CRITICAL **: 09:44:42.535: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 821, Main Thread] WARNING: Failed to execute child process “update-desktop-database” (No such file or directory): 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): GLib-GIO-WARNING **: 09:44:42.614: Failed to execute child process “update-desktop-database” (No such file or directory)
+[Parent 821, Main Thread] WARNING: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gdk-CRITICAL **: 09:44:44.561: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed
+[Parent 821, Main Thread] WARNING: gtk_window_set_titlebar() called on a realized window: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:821): Gtk-WARNING **: 09:44:44.566: gtk_window_set_titlebar() called on a realized window
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.033: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.033: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.097: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.097: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.097: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.097: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.097: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.097: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.097: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.097: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.097: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.097: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.098: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.098: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.098: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.098: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.098: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:09.098: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:09.763: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed
+[Parent 818, Main Thread] WARNING: gtk_window_set_titlebar() called on a realized window: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gtk-WARNING **: 09:45:09.768: gtk_window_set_titlebar() called on a realized window
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.735: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.735: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:34.798: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:34.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:35.432: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed
+[Parent 818, Main Thread] WARNING: gtk_window_set_titlebar() called on a realized window: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gtk-WARNING **: 09:45:35.438: gtk_window_set_titlebar() called on a realized window
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.864: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.864: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.864: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.864: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.864: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.864: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.864: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.864: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.865: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.865: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.865: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.865: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.865: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.865: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.865: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.865: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:47.930: gdk_cairo_surface_create_from_pixbuf: assertion 'GDK_IS_PIXBUF (pixbuf)' failed
+[Parent 818, Main Thread] WARNING: g_object_unref: assertion 'G_IS_OBJECT (object)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): GLib-GObject-CRITICAL **: 09:45:47.930: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+[Parent 818, Main Thread] WARNING: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gdk-CRITICAL **: 09:45:48.554: gdk_window_get_position: assertion 'GDK_IS_WINDOW (window)' failed
+[Parent 818, Main Thread] WARNING: gtk_window_set_titlebar() called on a realized window: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gtk-WARNING **: 09:45:48.560: gtk_window_set_titlebar() called on a realized window
+[Parent 818, Main Thread] WARNING: gtk_window_set_titlebar() called on a realized window: 'glib warning', file /home/buildozer/aports/community/firefox/src/firefox-126.0.1/toolkit/xre/nsSigHandlers.cpp:187
+
+(firefox:818): Gtk-WARNING **: 09:45:54.325: gtk_window_set_titlebar() called on a realized window

@@ -8,6 +8,7 @@ package main
 import (
 	"context"
 	"log"
+	"math/rand"
 	"time"
 
 	// "go/types"
@@ -23,6 +24,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
+// Переменные окружения
 type ENV struct {
 	ListenPort      string
 	ImageName       string
@@ -32,6 +34,17 @@ type ENV struct {
 	Network         string
 	RedirectPrefix  string
 	LBport          string
+	CookieName      string
+}
+
+// Параметры контейнера
+type UContainer struct {
+	Name    string
+	Route   string
+	ISExist bool
+	CState  string
+	CStatus string
+	CID     string
 }
 
 func init() {
@@ -60,6 +73,7 @@ func main() {
 		c.RedirectURL, _ = os.LookupEnv("REDIRECTURL")
 		c.RedirectPrefix, _ = os.LookupEnv("REDIRECTPREFIX")
 		c.LBport, _ = os.LookupEnv("LBPORT")
+		c.CookieName, _ = os.LookupEnv("COOKIENAME")
 		return c
 
 	}()
@@ -73,41 +87,79 @@ func main() {
 		panic(err)
 	}
 
-	// router.GET("/demo", func(ctx *gin.Context) {
-	// 	ctx.IndentedJSON(200, gin.H{
-	// 		"data": true,
-	// 	})
-	// })
-
-	// Роутер берет из урла имя контенера
+	// Роутер берет из параметров урла имя контенера
 	// После чего создается новый контейнер
 	// с параметрами
-	router.GET("/:name", func(ctx *gin.Context) {
-		n := ctx.Param("name")
-		st := runContainer(ctxD, cli, n, conf)
-		//ctx.IndentedJSON(200, gin.H{
-		//	"state": st,
-		//})
-		if st {
-			// Задержка на запуск контейнера. Заменить на проверку состояния
-			time.Sleep(time.Second * 15)
-			// Редирект на УРЛ с контейнером
-			//ctx.Redirect(301, conf.RedirectURL+n+conf.RedirectPrefix+"")
-			ctx.Redirect(301, conf.RedirectURL)
+	router.GET("/", func(ctx *gin.Context) {
+		var user_cont UContainer
+
+		user_cont.Route, err = ctx.Cookie(conf.CookieName)
+		if err != nil || user_cont.Route == "" {
+			log.Println("Cookie no set")
+			user_cont.Route = RandomRoute()
+			log.Println("Set ", user_cont.Route)
+		}
+		user_cont.Name = user_cont.Route[0:15]
+		log.Println("Cookie: ", user_cont.Route, " Name - ", user_cont.Name)
+
+		//user_cont.Name = ctx.Param("name")
+		//user_cont.Name = ctx.Query("name")
+
+		if user_cont.Exist(ctxD, cli) {
+			log.Println(user_cont.Route, " State - ", user_cont.CState, " Status - ", user_cont.CStatus, "name - ", user_cont.Name)
+
 		} else {
-			ctx.IndentedJSON(200, gin.H{
-				"err": true,
-			})
+			log.Println("Container " + user_cont.Name + " not found")
+		}
+
+		//st := runContainer(ctxD, cli, n, conf)
+
+		switch user_cont.CState {
+		// Редиректим пользователя по маршруту сразу если контейнер работаем
+		case "running":
+			ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+			ctx.Redirect(307, conf.RedirectURL)
+		case "exited":
+			// Если контейнер остановлен - зупустить, дождаться запуска и сделать редирект
+			log.Println("conteiner stopped")
+			if user_cont.StartContaner(ctxD, cli) {
+				ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+				// WIP: убрать таймеры, передалать на канал
+				time.Sleep(time.Second * 5)
+				ctx.Redirect(307, conf.RedirectURL)
+			} else {
+				ctx.IndentedJSON(200, gin.H{
+					"running": false,
+				})
+			}
+
+		default:
+
+			if !user_cont.ISExist {
+				user_cont.PullImage(ctxD, cli, conf)
+
+				if user_cont.CreateContaner(ctxD, cli, conf) {
+					log.Println("Create container - ", user_cont.Name, "route -", user_cont.Route)
+					ctx.SetCookie(conf.CookieName, user_cont.Route, 3600, "/", "127.0.0.1", false, true)
+					time.Sleep(time.Second * 7)
+					ctx.Redirect(307, conf.RedirectURL)
+				} else {
+					log.Println("Error to create container")
+					ctx.SetCookie(conf.CookieName, "-", 3600, "/", "127.0.0.1", false, true)
+					ctx.IndentedJSON(200, gin.H{
+						"err": true,
+					})
+				}
+			}
+
 		}
 	})
 
 	// тестовый роутер для остановки контенера
-	router.GET("/:name/:ops", func(ctx *gin.Context) {
-		n := ctx.Param("name")
-		s := ctx.Param("ops")
-		st := stopContainer(ctxD, cli, n, s)
+	router.GET("/clean", func(ctx *gin.Context) {
+		ctx.SetCookie(conf.CookieName, "", 3600, "/", "127.0.0.1", false, true)
 		ctx.IndentedJSON(200, gin.H{
-			"state": st,
+			"state": "clean",
 		})
 	})
 
@@ -119,90 +171,11 @@ func main() {
 // При отсутсвии - создать.
 // Если существует - запустить
 // Возращает true если успешно
-func runContainer(ctx context.Context, cli *client.Client, name string, conf ENV) bool {
+// func runContainer(ctx context.Context, cli *client.Client, name string, conf ENV) bool {
 
-	containes, err := cli.ContainerList(ctx, container.ListOptions{
-		All: true,
-	})
-	if err != nil {
-		log.Fatalln(err)
-	}
+// 	if !exist {
 
-	var contID string
-	exist := false
-
-	for _, c := range containes {
-		for _, n := range c.Names {
-			// log.Println(n)
-			if n == "/"+name {
-				log.Println("Found: ", n, " like a ", "/"+name)
-				exist = true
-				contID = c.ID
-				break
-			}
-		}
-	}
-
-	if !exist {
-
-		//imageName := "nginx:1.16.0-alpine"
-
-		out, err := cli.ImagePull(ctx, conf.ImageName, image.PullOptions{})
-		if err != nil {
-			panic(err)
-		}
-		io.Copy(os.Stdout, out)
-
-		resp, err := cli.ContainerCreate(ctx, &container.Config{
-			Image: conf.ImageName,
-			Labels: map[string]string{
-				"traefik.enable": "true",
-				"traefik.http.routers." + name + ".entrypoints": "web",
-				//"traefik.http.services." + name + ".loadbalancer.server.port": "80",
-				"traefik.http.services." + name + ".loadbalancer.server.port": conf.LBport,
-				//	"traefik.docker.network":                                      "kiosk-int",
-				"traefik.docker.network": conf.Network,
-
-				//"traefik.http.routers." + name + ".rule": "PathPrefix(`/" + name + conf.RedirectPrefix + "`)",
-				"traefik.http.routers." + name + ".rule": "PathPrefix(`/`)",
-			},
-			Env: []string{
-				"LANG=ru_RU.UTF-8",
-				"KEEP_APP_RUNNING=1",
-				"DARK_MODE=1",
-				"FF_OPEN_URL=ya.ru",
-				"FF_KIOSK=1",
-			},
-			// ExposedPorts: nat.PortSet{
-			// 	"5800": struct{}{},
-			// },
-		},
-			// &container.HostConfig{
-			// 	PortBindings: nat.PortMap{
-			// 		nat.Port("5800"): []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "5800"}},
-			// 	},
-			// },
-			nil,
-			&network.NetworkingConfig{
-				// Определение подключения к сети
-				EndpointsConfig: conf.EndpointsConfig,
-			}, nil, name)
-
-		if err != nil {
-			panic(err)
-		}
-
-		if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
-			panic(err)
-		}
-	} else {
-		if err := cli.ContainerStart(ctx, contID, container.StartOptions{}); err != nil {
-			panic(err)
-		}
-	}
-
-	return true
-}
+// 		//imageName := "nginx:1.16.0-alpine"
 
 // Тест - остановка контейнера. Возвращает true если успешно
 func stopContainer(ctx context.Context, cli *client.Client, name string, ops string) bool {
@@ -235,4 +208,117 @@ func stopContainer(ctx context.Context, cli *client.Client, name string, ops str
 		return false
 	}
 
+}
+
+func (cont *UContainer) Exist(ctx context.Context, cli *client.Client) bool {
+
+	containes, err := cli.ContainerList(ctx, container.ListOptions{
+		All: true,
+	})
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// Итерация по списку контенейров для поиска айдишника контейнера
+	for _, c := range containes {
+		// При балансировке может вернуться несколько имен. Берем первое
+		for _, n := range c.Names {
+			// log.Println(n)
+			if n == "/"+cont.Name {
+				log.Println("Found: ", n, " like a ", "/"+cont.Name)
+				cont.ISExist = true
+				//cont.Route = c.ID
+				cont.CState = c.State
+				cont.CStatus = c.Status
+				cont.CID = c.ID
+				break
+			}
+		}
+	}
+
+	return cont.ISExist
+
+}
+
+func (cont *UContainer) PullImage(ctx context.Context, cli *client.Client, conf ENV) {
+
+	out, err := cli.ImagePull(ctx, conf.ImageName, image.PullOptions{})
+	if err != nil {
+		panic(err)
+	}
+	io.Copy(os.Stdout, out)
+
+}
+
+func (cont *UContainer) CreateContaner(ctx context.Context, cli *client.Client, conf ENV) bool {
+	resp, err := cli.ContainerCreate(ctx, &container.Config{
+		Image: conf.ImageName,
+		Labels: map[string]string{
+			"traefik.enable": "true",
+			"traefik.http.routers." + cont.Name + ".entrypoints": "web",
+			//"traefik.http.services." + name + ".loadbalancer.server.port": "80",
+			"traefik.http.services." + cont.Name + ".loadbalancer.server.port": conf.LBport,
+			//	"traefik.docker.network":                                      "kiosk-int",
+			"traefik.docker.network": conf.Network,
+
+			//"traefik.http.routers." + name + ".rule": "PathPrefix(`/" + name + conf.RedirectPrefix + "`)",
+			// Роут на основе префикса
+			//"traefik.http.routers." + cont.Name + ".rule": "PathPrefix(`/`)",
+			// Роут на основе кук
+			"traefik.http.routers." + cont.Name + ".rule": "HeaderRegexp(`Cookie`, `.*" + conf.CookieName + "=" + cont.Route + ".*`)",
+		},
+		Env: []string{
+			"LANG=ru_RU.UTF-8",
+			"KEEP_APP_RUNNING=1",
+			"DARK_MODE=1",
+			"FF_OPEN_URL=ya.ru",
+			"FF_KIOSK=1",
+		},
+		// ExposedPorts: nat.PortSet{
+		// 	"5800": struct{}{},
+		// },
+	},
+		// &container.HostConfig{
+		// 	PortBindings: nat.PortMap{
+		// 		nat.Port("5800"): []nat.PortBinding{{HostIP: "0.0.0.0", HostPort: "5800"}},
+		// 	},
+		// },
+		nil,
+		&network.NetworkingConfig{
+			// Определение подключения к сети
+			EndpointsConfig: conf.EndpointsConfig,
+		}, nil, cont.Name)
+
+	if err != nil {
+		panic(err)
+	}
+
+	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
+		panic(err)
+	} else {
+		if err := cli.ContainerStart(ctx, cont.Name, container.StartOptions{}); err != nil {
+			panic(err)
+		}
+	}
+
+	return cont.Exist(ctx, cli)
+
+}
+
+func RandomRoute() string {
+	var letters = []rune("abcdefghijklmnopqrstuvwxyz0123456789")
+
+	s := make([]rune, 64)
+	for i := range s {
+		s[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(s)
+}
+
+func (cont *UContainer) StartContaner(ctx context.Context, cli *client.Client) bool {
+	err := cli.ContainerStart(ctx, cont.CID, container.StartOptions{})
+	if err != nil {
+		return false
+	} else {
+		return true
+	}
 }
