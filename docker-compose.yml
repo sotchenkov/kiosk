@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   traefik:
     image: "traefik:v3.1"
@@ -10,7 +8,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik/traefik.yml:/traefik.yml:ro"
+      - "./config/traefik/traefik.yml:/traefik.yml:ro"
     networks:
       - default
       - kiosk-int
@@ -21,19 +19,15 @@ services:
   kioskcontroller:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./deploy/Dockerfile
     ports:
       - 8099:8099
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-    environment:
-      - LISTENPORT=8099
-      - IMAGENAME=jlesage/firefox
-      - DOCKERNETWORK=kiosk-net
-      - REDIRECTURL=http://127.0.0.1/
-      # - REDIRECTPREFIX=
-      - LBPORT=5800
-      - COOKIENAME=monitorcookie
+    env_file:
+      ".env"
+    networks:
+      - kiosk-int
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.kioskcontroller.entrypoints=web"
@@ -70,9 +64,10 @@ services:
 
 networks:
   kiosk-int:
+    name: kiosk-int
     internal: true
 
   default:
-    external:
-      name: kiosk-net
+    name: kiosk-net
+    external: true
 
