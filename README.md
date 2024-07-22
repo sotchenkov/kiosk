@@ -1,1 +1,5 @@
 # kioskbrowser
+
+```
+http://localhost/mast
+```

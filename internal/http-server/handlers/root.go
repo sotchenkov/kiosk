@@ -11,59 +11,47 @@ import (
 	"github.com/rs/zerolog"
 )
 
-// FIX: Не матчится кука с существующим контейнером
-
 // RootHandler возвращает обработчик для корневого маршрута.
 func RootHandler(ctx context.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		clientIP := c.ClientIP()
-		userContainer := initializeUserContainer(c, cfg, zl, clientIP)
-
+		userContainer := initializeUserContainer(ctx, c, cfg, zl, dockerCLI, clientIP)
 		handleContainerState(ctx, c, zl, cfg, dockerCLI, userContainer, clientIP)
 	}
 }
 
 // initializeUserContainer инициализирует контейнер пользователя
-func initializeUserContainer(c *gin.Context, cfg *config.Config, zl *zerolog.Logger, clientIP string) docker.UContainer {
-	var userContainer docker.UContainer
+func initializeUserContainer(ctx context.Context, c *gin.Context, cfg *config.Config, zl *zerolog.Logger, dockerCLI *docker.DockerClient, clientIP string) docker.UContainer {
+	userContainer := docker.UContainer{}
 	var err error
+	
 	userContainer.Route, err = c.Cookie(cfg.CookieName)
 	if err != nil || userContainer.Route == "" {
-		zl.Debug().
-			Str("user", "cookie not found").
-			Str("client", clientIP).
-			Send()
-		userContainer.Route = random.NewRandomString(15) // TODO: Исключить вероятность создания контейнеров с одиниковыми именами
-		zl.Debug().
-			Str("user", "new cookie").
-			Str("cookie", userContainer.Route).
-			Str("client", clientIP).
-			Send()
+		zl.Debug().Str("user", "cookie not found").Str("client", clientIP).Send()
+		userContainer.Route = random.NewRandomString(15)
+		zl.Debug().Str("user", "new cookie").Str("cookie", userContainer.Route).Str("client", clientIP).Send()
+	}
+	
+	userContainer.Name = userContainer.Route
+	if userContainer.Exist(ctx, zl, dockerCLI.Client) {
+		zl.Info().Str("route", userContainer.Route).Str("container_name", userContainer.Name).Str("client", clientIP).
+			Msg("Using existing container")
+		return userContainer
 	}
 
-	userContainer.Name = userContainer.Route
-	zl.Info().
-		Str("route", userContainer.Route).
-		Str("container_name", userContainer.Name).
-		Str("client", clientIP).
+	zl.Info().Str("route", userContainer.Route).Str("container_name", userContainer.Name).Str("client", clientIP).
 		Msg("Trying to follow a new route")
-
+	
 	return userContainer
 }
 
-// initializeUserContainer получает состояние контейнера
+// handleContainerState получает состояние контейнера
 func handleContainerState(ctx context.Context, c *gin.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient, userContainer docker.UContainer, clientIP string) {
 	if userContainer.Exist(ctx, zl, dockerCLI.Client) {
-		zl.Debug().
-			Str("container", userContainer.CState).
-			Str("route", userContainer.Route).
-			Str("client", clientIP).
+		zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
 			Msg(userContainer.Route + "; State - " + userContainer.CState + "; Status - " + userContainer.CStatus + "; name - " + userContainer.Name)
 	} else {
-		zl.Debug().
-			Str("container", "not found").
-			Str("client", clientIP).
-			Msg("Container " + userContainer.Name + " not found")
+		zl.Debug().Str("container", "not found").Str("client", clientIP).Msg("Container " + userContainer.Name + " not found")
 	}
 
 	switch userContainer.CState {
@@ -77,21 +65,16 @@ func handleContainerState(ctx context.Context, c *gin.Context, zl *zerolog.Logge
 }
 
 func handleRunningContainer(c *gin.Context, zl *zerolog.Logger, cfg *config.Config, userContainer docker.UContainer, clientIP string) {
-	zl.Debug().
-		Str("container", userContainer.CState).
-		Str("route", userContainer.Route).
-		Str("client", clientIP).
+	zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
 		Msg("Container " + userContainer.Name + " is running. Redirect")
 	c.SetCookie(cfg.CookieName, userContainer.Route, 3600, "/", cfg.ControllerHost, false, true)
 	c.Redirect(307, cfg.RedirectURL)
 }
 
 func handleExitedContainer(ctx context.Context, c *gin.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient, userContainer docker.UContainer, clientIP string) {
-	zl.Debug().
-		Str("container", userContainer.CState).
-		Str("route", userContainer.Route).
-		Str("client", clientIP).
+	zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
 		Msg("Container " + userContainer.Name + " stopped. Attempt to launch")
+	
 	if userContainer.StartContainer(ctx, dockerCLI.Client) {
 		c.SetCookie(cfg.CookieName, userContainer.Route, 3600, "/", cfg.ControllerHost, false, true)
 		time.Sleep(time.Second * 5) // TODO: Заменить слипы на коллбэки или что-то типо этого
@@ -104,42 +87,32 @@ func handleExitedContainer(ctx context.Context, c *gin.Context, zl *zerolog.Logg
 }
 
 func handleContainerNotFound(ctx context.Context, c *gin.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient, userContainer docker.UContainer, clientIP string) {
-	zl.Debug().
-		Str("container", "not found").
-		Str("route", userContainer.Route).
-		Str("client", clientIP).
+	zl.Debug().Str("container", "not found").Str("route", userContainer.Route).Str("client", clientIP).
 		Msg("Container not found. Attempt to create")
+	
 	if !userContainer.ISExist {
 		userContainer.PullImage(ctx, dockerCLI.Client, cfg)
 		if userContainer.CreateContainer(ctx, zl, dockerCLI.Client, cfg) {
-			zl.Debug().
-				Str("container", "created").
-				Str("route", userContainer.Route).
-				Str("client", clientIP).
+			zl.Debug().Str("container", "created").Str("route", userContainer.Route).Str("client", clientIP).
 				Msg("Create new container with name " + userContainer.Name)
 
 			if !userContainer.StartContainer(ctx, dockerCLI.Client) {
-				zl.Warn().
-					Str("client", clientIP).
-					Msg("Error to start container")
+				zl.Warn().Str("client", clientIP).Msg("Error to start container")
 				c.SetCookie(cfg.CookieName, "-", 3600, "/", cfg.ControllerHost, false, true)
 				c.IndentedJSON(200, gin.H{
 					"err": true,
 				})
 			}
-			zl.Debug().
-				Str("container", "started").
-				Str("route", userContainer.Route).
-				Str("client", clientIP).
+			
+			zl.Debug().Str("container", "started").Str("route", userContainer.Route).Str("client", clientIP).
 				Msg("Started container with name " + userContainer.Name)
 
 			c.SetCookie(cfg.CookieName, userContainer.Route, 3600, "/", cfg.ControllerHost, false, true)
 			time.Sleep(time.Second * 7) // TODO: Заменить слипы на коллбэки или что-то типо этого
 			c.Redirect(307, cfg.RedirectURL)
+			
 		} else {
-			zl.Warn().
-				Str("client", clientIP).
-				Msg("Error to create container")
+			zl.Warn().Str("client", clientIP).Msg("Error to create container")
 			c.SetCookie(cfg.CookieName, "-", 3600, "/", cfg.ControllerHost, false, true)
 			c.IndentedJSON(200, gin.H{
 				"err": true,

@@ -66,8 +66,8 @@ networks:
   kiosk-int:
     name: kiosk-int
     internal: true
-
+  
+  # Заменил external: true на driver: bridge, чтобы сеть автоматически создавалась при docker compose up -d
   default:
     name: kiosk-net
-    external: true
-
+    driver: bridge
