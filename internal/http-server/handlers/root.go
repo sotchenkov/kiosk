@@ -91,7 +91,6 @@ func handleContainerNotFound(ctx context.Context, c *gin.Context, zl *zerolog.Lo
 		Msg("Container not found. Attempt to create")
 
 	if !userContainer.ISExist {
-		userContainer.PullImage(ctx, dockerCLI.Client, cfg)
 		if userContainer.CreateContainer(ctx, zl, dockerCLI.Client, cfg) {
 			zl.Debug().Str("container", "created").Str("route", userContainer.Route).Str("client", clientIP).
 				Msg("Create new container with name " + userContainer.Name)

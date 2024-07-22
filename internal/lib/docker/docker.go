@@ -105,14 +105,12 @@ func (cont *UContainer) StartContainer(ctx context.Context, cli *client.Client) 
 	}
 }
 
-func (cont *UContainer) PullImage(ctx context.Context, cli *client.Client, cfg *config.Config) {
-
+func (dcli *DockerClient) PullImage(ctx context.Context, cli *client.Client, cfg *config.Config) {
 	out, err := cli.ImagePull(ctx, cfg.ImageName, image.PullOptions{})
 	if err != nil {
 		panic(err)
 	}
 	io.Copy(os.Stdout, out)
-
 }
 
 func (cont *UContainer) CreateContainer(ctx context.Context, zl *zerolog.Logger, cli *client.Client, cfg *config.Config) bool {

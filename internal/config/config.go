@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"log"
 
 	"github.com/docker/docker/api/types/network"
@@ -30,12 +31,18 @@ func MustLoad() (*Config, error) {
 		return nil, err
 	}
 
+	if cfg.ListenPort == "" {
+		err := errors.New("ListenPort is not set")
+		log.Printf("The necessary variables are missing in the environment: %v", err)
+		return nil, err
+	}
+
 	cfg.EndpointsConfig = map[string]*network.EndpointSettings{
 		cfg.Network: {
 			NetworkID: cfg.Network,
 		},
 	}
-	
+
 	log.Print("config is loaded")
 	return &cfg, nil
 }
