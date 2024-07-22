@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"kiosk/internal/config"
 	"kiosk/internal/http-server/handlers"
 	"kiosk/internal/lib/docker"
@@ -37,6 +38,7 @@ func main() {
 	zl.Info().Msg("router and handlers has been created")
 
 	zl.Info().Msg("starting server...")
+	fmt.Println(cfg.ListenPort)
 	router.Run(":" + cfg.ListenPort)
 }
 

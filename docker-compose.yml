@@ -32,10 +32,11 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.kioskcontroller.entrypoints=web"
       - "traefik.http.services.kioskcontroller.loadbalancer.server.port=8099"
-      - "traefik.http.middlewares.kioskcontrollerstrip.stripprefix.prefixes=/mast"
+      - "traefik.http.middlewares.kioskcontrollerstrip.stripprefix.prefixes=${CONTROLLERROUTE}"
       - "traefik.http.routers.kioskcontroller.middlewares=kioskcontrollerstrip"
       - "traefik.docker.network=kiosk-int"
-      - "traefik.http.routers.kioskcontroller.rule=PathPrefix(`/mast`)"
+      #- "traefik.http.routers.kioskcontroller.rule=PathPrefix(`/mast`) || PathPrefix(`/clean`)"
+      - "traefik.http.routers.kioskcontroller.rule=PathPrefix(`${CONTROLLERROUTE}`) || PathPrefix(`${CLEANROUTE}`)"
 
 
 
