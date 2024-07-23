@@ -10,16 +10,17 @@ import (
 
 // Переменные окружения
 type Config struct {
-	Env             string `env:"ENV"`
-	ListenPort      string `env:"LISTENPORT"`
-	ImageName       string `env:"IMAGENAME"`
-	RedirectURL     string `env:"REDIRECTURL"`
-	Network         string `env:"DOCKERNETWORK"`
-	RedirectPrefix  string `env:"REDIRECTPREFIX"`
-	LBport          string `env:"LBPORT"`
-	CookieName      string `env:"COOKIENAME"`
-	ControllerHost  string `env:"CONTROLLERHOST"`
-	EndpointsConfig map[string]*network.EndpointSettings
+	Env                   string `env:"ENV"`
+	ListenPort            string `env:"LISTENPORT"`
+	ImageName             string `env:"IMAGENAME"`
+	RedirectURL           string `env:"REDIRECTURL"`
+	Network               string `env:"DOCKERNETWORK"`
+	RedirectPrefix        string `env:"REDIRECTPREFIX"`
+	LBport                string `env:"LBPORT"`
+	CookieName            string `env:"COOKIENAME"`
+	ControllerHost        string `env:"CONTROLLERHOST"`
+	EndpointsConfig       map[string]*network.EndpointSettings
+	ContainerReadyLogLine string `env:"CONTAINER_READY_LOG_LINE"`
 }
 
 func MustLoad() (*Config, error) {

@@ -1,10 +1,12 @@
 package docker
 
 import (
+	"bufio"
 	"context"
 	"io"
 	"kiosk/internal/config"
 	"os"
+	"strings"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/image"
@@ -148,4 +150,28 @@ func (cont *UContainer) CreateContainer(ctx context.Context, zl *zerolog.Logger,
 	zl.Info().Str("ContainerID", resp.ID).Msg("Container created successfully")
 
 	return true
+}
+
+// ListenContainerStart listens for Docker events and notifies when the specified container starts
+func ListenContainerStart(ctx context.Context, zl *zerolog.Logger, cli *client.Client, containerName string, cfg *config.Config, readyChan chan<- bool) {
+	options := container.LogsOptions{ShowStdout: true, ShowStderr: true, Follow: true, Tail: "3"}
+	reader, err := cli.ContainerLogs(ctx, containerName, options)
+	if err != nil {
+		zl.Debug().Err(err).Msg("Error fetching logs")
+		return
+	}
+	defer reader.Close()
+
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.Contains(line, cfg.ContainerReadyLogLine) {
+			readyChan <- true
+			return
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		zl.Debug().Err(err).Msg("Error scanning logs")
+	}
 }

@@ -72,50 +72,57 @@ func handleRunningContainer(c *gin.Context, zl *zerolog.Logger, cfg *config.Conf
 }
 
 func handleExitedContainer(ctx context.Context, c *gin.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient, userContainer docker.UContainer, clientIP string) {
-	zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
-		Msg("Container " + userContainer.Name + " stopped. Attempt to launch")
+	if !userContainer.StartContainer(ctx, dockerCLI.Client) {
+		zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
+			Msg("Container " + userContainer.Name + " exited and cannot be started")
+		return
+	}
 
-	if userContainer.StartContainer(ctx, dockerCLI.Client) {
+	zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
+		Msg("Container " + userContainer.Name + " exited, now started")
+
+	readyChan := make(chan bool)
+	go docker.ListenContainerStart(ctx, zl, dockerCLI.Client, userContainer.Name, cfg, readyChan)
+
+	select {
+	case <-readyChan:
+		zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
+			Msg("Container " + userContainer.Name + " is ready. Redirect")
 		c.SetCookie(cfg.CookieName, userContainer.Route, 3600, cfg.RedirectURL, cfg.ControllerHost, false, true)
-		time.Sleep(time.Second * 5) // TODO: Заменить слипы на коллбэки или что-то типо этого
 		c.Redirect(307, cfg.RedirectURL)
-	} else {
-		c.IndentedJSON(200, gin.H{
-			"running": false,
-		})
+	case <-time.After(30 * time.Second):
+		zl.Debug().Str("container", userContainer.CState).Str("route", userContainer.Route).Str("client", clientIP).
+			Msg("Container " + userContainer.Name + " took too long to start")
 	}
 }
 
 func handleContainerNotFound(ctx context.Context, c *gin.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient, userContainer docker.UContainer, clientIP string) {
-	zl.Debug().Str("container", "not found").Str("route", userContainer.Route).Str("client", clientIP).
-		Msg("Container not found. Attempt to create")
+	zl.Debug().Str("container", "not found").Str("client", clientIP).Msg("Container " + userContainer.Name + " not found")
 
-	if !userContainer.ISExist {
-		if userContainer.CreateContainer(ctx, zl, dockerCLI.Client, cfg) {
-			zl.Debug().Str("container", "created").Str("route", userContainer.Route).Str("client", clientIP).
-				Msg("Create new container with name " + userContainer.Name)
-
-			if !userContainer.StartContainer(ctx, dockerCLI.Client) {
-				zl.Warn().Str("client", clientIP).Msg("Error to start container")
-				c.SetCookie(cfg.CookieName, "-", 3600, cfg.RedirectURL, cfg.ControllerHost, false, true)
-				c.IndentedJSON(200, gin.H{
-					"err": true,
-				})
-			}
-
-			zl.Debug().Str("container", "started").Str("route", userContainer.Route).Str("client", clientIP).
-				Msg("Started container with name " + userContainer.Name)
-
-			c.SetCookie(cfg.CookieName, userContainer.Route, 3600, cfg.RedirectURL, cfg.ControllerHost, false, true)
-			time.Sleep(time.Second * 7) // TODO: Заменить слипы на коллбэки или что-то типо этого
-			c.Redirect(307, cfg.RedirectURL)
-
-		} else {
-			zl.Warn().Str("client", clientIP).Msg("Error to create container")
-			c.SetCookie(cfg.CookieName, "-", 3600, cfg.RedirectURL, cfg.ControllerHost, false, true)
-			c.IndentedJSON(200, gin.H{
-				"err": true,
-			})
+	if userContainer.CreateContainer(ctx, zl, dockerCLI.Client, cfg) {
+		zl.Debug().Str("container", "created").Str("route", userContainer.Route).Str("client", clientIP).
+			Msg("Container " + userContainer.Name + " created")
+		if !userContainer.StartContainer(ctx, dockerCLI.Client) {
+			zl.Debug().Str("container", "not started").Str("route", userContainer.Route).Str("client", clientIP).
+				Msg("Container " + userContainer.Name + " could not be started")
+			return
 		}
+
+		readyChan := make(chan bool)
+		go docker.ListenContainerStart(ctx, zl, dockerCLI.Client, userContainer.Name, cfg, readyChan)
+
+		select {
+		case <-readyChan:
+			zl.Debug().Str("container", "running").Str("route", userContainer.Route).Str("client", clientIP).
+				Msg("Container " + userContainer.Name + " is running. Redirect")
+			c.SetCookie(cfg.CookieName, userContainer.Route, 3600, cfg.RedirectURL, cfg.ControllerHost, false, true)
+			c.Redirect(307, cfg.RedirectURL)
+		case <-time.After(30 * time.Second):
+			zl.Debug().Str("container", "timeout").Str("route", userContainer.Route).Str("client", clientIP).
+				Msg("Container " + userContainer.Name + " took too long to start")
+		}
+	} else {
+		zl.Debug().Str("container", "not created").Str("route", userContainer.Route).Str("client", clientIP).
+			Msg("Container " + userContainer.Name + " could not be created")
 	}
 }
