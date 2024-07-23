@@ -1,0 +1,2 @@
+/deployments/authentik/*
+!/deployments/authentik/docker-compose.yml
