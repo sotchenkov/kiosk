@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"context"
+	"time"
+
 	"kiosk/internal/config"
 	"kiosk/internal/lib/docker"
 	"kiosk/internal/lib/random"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
@@ -22,13 +23,26 @@ func RootHandler(ctx context.Context, zl *zerolog.Logger, cfg *config.Config, do
 
 // initializeUserContainer инициализирует контейнер пользователя
 func initializeUserContainer(ctx context.Context, c *gin.Context, cfg *config.Config, zl *zerolog.Logger, dockerCLI *docker.DockerClient, clientIP string) docker.UContainer {
+	const fn = "kiosk.internal.httpserver.handlers.root"
 	userContainer := docker.UContainer{}
 	var err error
 
 	userContainer.Route, err = c.Cookie(cfg.CookieName)
 	if err != nil || userContainer.Route == "" {
 		zl.Debug().Str("user", "cookie not found").Str("client", clientIP).Send()
+		// Исключение коллизий
 		userContainer.Route = random.NewRandomString(65)
+		newContanerNameRetry := 0
+		for userContainer.ISExist {
+			zl.Info().Str("fn", fn).Str("Cname", userContainer.Route).Msg("There was a collision of container names")
+
+			if newContanerNameRetry > 5 {
+				zl.Error().Str("fn", fn).Msg("More than 5 retries for creating uniq container name. Something is wrong.")
+				c.AbortWithStatus(508)
+			}
+			newContanerNameRetry++
+			userContainer.Route = random.NewRandomString(65)
+		}
 		zl.Debug().Str("user", "new cookie").Str("cookie", userContainer.Route).Str("client", clientIP).Send()
 	}
 
