@@ -16,47 +16,50 @@ import (
 func RootHandler(ctx context.Context, zl *zerolog.Logger, cfg *config.Config, dockerCLI *docker.DockerClient) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		clientIP := c.ClientIP()
-		userContainer := initializeUserContainer(ctx, c, cfg, zl, dockerCLI, clientIP)
+		userContainer := initializeUserContainer(c, cfg, zl, dockerCLI, clientIP)
 		handleContainerState(ctx, c, zl, cfg, dockerCLI, userContainer, clientIP)
 	}
 }
 
 // initializeUserContainer инициализирует контейнер пользователя
-func initializeUserContainer(ctx context.Context, c *gin.Context, cfg *config.Config, zl *zerolog.Logger, dockerCLI *docker.DockerClient, clientIP string) docker.UContainer {
-	const fn = "kiosk.internal.httpserver.handlers.root"
+func initializeUserContainer(c *gin.Context, cfg *config.Config, zl *zerolog.Logger, dockerCLI *docker.DockerClient, clientIP string) docker.UContainer {
 	userContainer := docker.UContainer{}
 	var err error
 
 	userContainer.Route, err = c.Cookie(cfg.CookieName)
 	if err != nil || userContainer.Route == "" {
 		zl.Debug().Str("user", "cookie not found").Str("client", clientIP).Send()
-		// Исключение коллизий
-		userContainer.Route = random.NewRandomString(65)
-		newContanerNameRetry := 0
-		for userContainer.ISExist {
-			zl.Info().Str("fn", fn).Str("Cname", userContainer.Route).Msg("There was a collision of container names")
-
-			if newContanerNameRetry > 5 {
-				zl.Error().Str("fn", fn).Msg("More than 5 retries for creating uniq container name. Something is wrong.")
-				c.AbortWithStatus(508)
-			}
-			newContanerNameRetry++
-			userContainer.Route = random.NewRandomString(65)
-		}
+		userContainer = initializeNewContainer(c, zl , &userContainer, dockerCLI)
 		zl.Debug().Str("user", "new cookie").Str("cookie", userContainer.Route).Str("client", clientIP).Send()
-	}
-
-	userContainer.Name = userContainer.Route[:15]
-	if userContainer.Exist(ctx, zl, dockerCLI.Client) {
-		zl.Info().Str("route", userContainer.Route).Str("container_name", userContainer.Name).Str("client", clientIP).
-			Msg("Using existing container")
 		return userContainer
-	}
-
-	zl.Info().Str("route", userContainer.Route).Str("container_name", userContainer.Name).Str("client", clientIP).
-		Msg("Trying to follow a new route")
-
+	} 
+	
+	zl.Info().Str("cookie found with route", userContainer.Route).Str("container_name", userContainer.Name).Str("client", clientIP)
+	userContainer.Name = userContainer.Route[:15]
 	return userContainer
+}
+
+func initializeNewContainer(c *gin.Context, zl *zerolog.Logger, uc *docker.UContainer, dockerCLI *docker.DockerClient) docker.UContainer {
+	const fn = "kiosk.internal.httpserver.handlers.root.initializeNewContainer"
+
+	uc.Route = random.NewRandomString(65)
+	uc.Name = uc.Route[:15]
+	// Исключаем коллизии
+	newContanerNameRetry := 0
+	for uc.Exist(c, zl, dockerCLI.Client) {
+		zl.Info().Str("fn", fn).Str("Cname", uc.Route).Msg("There was a collision of container names")
+
+		if newContanerNameRetry > 5 {
+			zl.Error().Str("fn", fn).Msg("More than 5 retries for creating uniq container name. Something is wrong.")
+			c.AbortWithStatus(508)
+		}
+
+		newContanerNameRetry++
+		uc.Route = random.NewRandomString(65)
+		uc.Name = uc.Route[:15]
+	}
+	
+	return *uc
 }
 
 // handleContainerState получает состояние контейнера
